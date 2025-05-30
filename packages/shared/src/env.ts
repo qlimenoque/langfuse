@@ -105,6 +105,15 @@ const EnvSchema = z.object({
     .number()
     .default(80e6), // 80MB
   LANGFUSE_CLICKHOUSE_DELETION_TIMEOUT_MS: z.coerce.number().default(240_000), // 4 minutes
+
+  QUEUE_CONSUMER_DEAD_LETTER_RETRY_QUEUE_IS_ENABLED: z
+    .enum(["true", "false"])
+    .default("false"),
+
+  // DLQ retry configuration
+  LANGFUSE_DLQ_RETRY_DELAY_HOURS: z.coerce.number().default(24),
+  LANGFUSE_DLQ_MAX_RETRY_AGE_HOURS: z.coerce.number().default(72),
+  LANGFUSE_DLQ_MAX_RETRIES: z.coerce.number().default(3),
 });
 
 export const env: z.infer<typeof EnvSchema> =

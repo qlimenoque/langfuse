@@ -198,6 +198,11 @@ const EnvSchema = z.object({
     .enum(["true", "false"])
     .default("false"),
 
+  // DLQ retry configuration
+  LANGFUSE_DLQ_RETRY_DELAY_HOURS: z.coerce.number().default(24),
+  LANGFUSE_DLQ_MAX_RETRY_AGE_HOURS: z.coerce.number().default(72),
+  LANGFUSE_DLQ_MAX_RETRIES: z.coerce.number().default(3),
+
   // Core data S3 upload - Langfuse Cloud
   LANGFUSE_S3_CORE_DATA_EXPORT_IS_ENABLED: z
     .enum(["true", "false"])
